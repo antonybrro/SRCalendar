@@ -18,6 +18,7 @@ class CollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .red
         day = UILabel(frame: self.contentView.bounds)
         day.textAlignment = .center
         self.addSubview(day)

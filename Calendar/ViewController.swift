@@ -9,9 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+        
+    var calendarCollectionView: UICollectionView!
     var fromDate: Date!
     var fromFirstDayMonth: Date!
     var collectionMonthLayout: MonthCollectionViewLayout!
@@ -19,15 +18,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "collectionViewCell")
-        collectionView.register(MonthHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "monthHeaderView")
-        
-        collectionMonthLayout = MonthCollectionViewLayout().initWithWidth(width: self.collectionView!.bounds.width)
-        
+        collectionMonthLayout = MonthCollectionViewLayout().initWithWidth(width: self.view.bounds.width)
         collectionMonthLayout.scrollDirection = .vertical
-        collectionView.dataSource = self
         
-//        self.collectionView.alwaysBounceVertical = false
+        calendarCollectionView = CalendarCollectionView(frame: self.view.frame, collectionViewLayout: self.collectionMonthLayout)
+        calendarCollectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        
+        calendarCollectionView.dataSource = self
+        calendarCollectionView.alwaysBounceVertical = false
+        
+        self.view.addSubview(calendarCollectionView)
         
         createDateFrom()
         reloadContent()
@@ -37,19 +37,32 @@ class ViewController: UIViewController {
         self.refreshLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        scrollToLastItem()
+    }
+    
+    func scrollToLastItem() {
+        let section = calendarCollectionView.numberOfSections - 1
+        let item = calendarCollectionView.numberOfItems(inSection: section) - 1
+        let indexPath = IndexPath.init(item: item, section: section)
+        calendarCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+    }
+    
     func refreshLayout() {
         self.collectionMonthLayout.scrollDirection = .vertical
-        self.collectionView.setCollectionViewLayout(self.collectionMonthLayout, animated: true)
-        self.collectionView.reloadData()
+        self.calendarCollectionView.setCollectionViewLayout(self.collectionMonthLayout, animated: true)
+        self.calendarCollectionView.reloadData()
     }
     
     func reloadContent() {
         self.fromFirstDayMonth = fromDate.firstDayOfTheMonth()
-        self.collectionView.reloadData()
+        self.calendarCollectionView.reloadData()
     }
     
     private func createDateFrom() {
-        let calendar = Date().calendar()
+        var calendar = Date().calendar()
         var components = calendar.dateComponents([.year, .month, .day], from: Date())
         components.day = 1
         components.month = 1
@@ -85,19 +98,17 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as? CollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        view.backgroundColor = .red
-        cell.backgroundView = view
         
         if let day = dateAtIndexPath(indexPath)?.dayComponents() {
             cell.setDay("\(day)")
         } else {
             cell.setDay("")
         }
+        
+        cell.clipsToBounds = true
         
         return cell
     }
@@ -118,16 +129,16 @@ extension ViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
+
         if kind == UICollectionElementKindSectionHeader {
-            guard let monthHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "monthHeaderView", for: indexPath) as? MonthHeaderView else {
+            guard let monthHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: monthHeaderViewId, for: indexPath) as? MonthHeaderView else {
                 return UICollectionReusableView()
             }
             monthHeaderView.monthLabel.text = month(at: indexPath)
-            
+
             return monthHeaderView
         }
-        
+
         return UICollectionReusableView()
     }
 }

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MonthCollectionViewLayout: CollectionViewFlowLayoutWithStickyHeader {
+class MonthCollectionViewLayout: UICollectionViewFlowLayout {
     
-    let MonthCollectionViewLayoutHeader = "MonthCollectionViewLayoutHeader"
     let MonthCollectionViewLayoutCell = "MonthCollectionViewLayoutCell"
+    let MonthCollectionViewLayoutHeader = "MonthCollectionViewLayoutHeader"
     
     var layoutInfo: [String: [IndexPath: UICollectionViewLayoutAttributes]]!
     
@@ -31,21 +31,6 @@ class MonthCollectionViewLayout: CollectionViewFlowLayoutWithStickyHeader {
         
         return self
     }
-    
-    //    func initWithWidth(width: CGFloat, itemSize: CGSize) -> MonthCollectionViewLayout {
-    //        self.headerReferenceSize = CGSize(width: width, height: 64)
-    //
-    //        self.itemSize = itemSize
-    //        var widthForSpace = width - 7 * self.itemSize.width
-    //        if widthForSpace < 0 {
-    //            widthForSpace = 0
-    //        }
-    //
-    //        self.minimumLineSpacing = widthForSpace / 6
-    //        self.minimumInteritemSpacing = widthForSpace / 6
-    //
-    //        return self
-    //    }
     
     override init() {
         super.init()
@@ -120,39 +105,20 @@ class MonthCollectionViewLayout: CollectionViewFlowLayoutWithStickyHeader {
     }
     
     func frameForItemAtIndexPath(indexPath: IndexPath, previousRect: CGRect, previousIndexPath: IndexPath?) -> CGRect {
-        if self.scrollDirection == .vertical {
-            if previousRect == .zero {
-                return CGRect(x: 0, y: self.headerReferenceSize.height + self.minimumLineSpacing, width: self.itemSize.width, height: self.itemSize.height)
-            } else {
-                var theoricalRect = previousRect
-                theoricalRect.origin.x = theoricalRect.origin.x + self.minimumLineSpacing + self.itemSize.width
-                if (indexPath.section - previousIndexPath!.section) > 0 {
-                    theoricalRect.origin.y = theoricalRect.origin.y + self.itemSize.height + self.headerReferenceSize.height + self.minimumLineSpacing
-                    theoricalRect.origin.x = 0
-                } else if (theoricalRect.origin.x + self.itemSize.width) > self.collectionView!.frame.size.width {
-                    theoricalRect.origin.x = 0
-                    theoricalRect.origin.y = theoricalRect.origin.y + self.minimumLineSpacing + self.itemSize.height
-                }
-                
-                return theoricalRect
-            }
+        if previousRect == .zero {
+            return CGRect(x: 0, y: self.headerReferenceSize.height + self.minimumLineSpacing, width: self.itemSize.width, height: self.itemSize.height)
         } else {
-            if previousRect == .zero {
-                return CGRect(x: 0, y: self.headerReferenceSize.height + self.minimumLineSpacing, width: self.itemSize.width, height: self.itemSize.height)
-            } else {
-                var theoricalRect = previousRect
-                theoricalRect.origin.x = theoricalRect.origin.x + self.minimumLineSpacing + self.itemSize.width
-                if (theoricalRect.origin.x + self.itemSize.width) > self.collectionView!.frame.size.width * CGFloat(indexPath.section + 1) {
-                    theoricalRect.origin.x = self.collectionView!.frame.size.width * CGFloat(indexPath.section)
-                    theoricalRect.origin.y = theoricalRect.origin.y + self.minimumLineSpacing + self.minimumLineSpacing + self.itemSize.height
-                }
-                if (indexPath.section - previousIndexPath!.section) > 0 {
-                    theoricalRect.origin.x = self.collectionView!.frame.size.width * CGFloat(indexPath.section)
-                    theoricalRect.origin.y = self.headerReferenceSize.height + self.minimumLineSpacing
-                }
-                
-                return theoricalRect
+            var theoricalRect = previousRect
+            theoricalRect.origin.x = theoricalRect.origin.x + self.minimumLineSpacing + self.itemSize.width
+            if (indexPath.section - previousIndexPath!.section) > 0 {
+                theoricalRect.origin.y = theoricalRect.origin.y + self.itemSize.height + self.headerReferenceSize.height + self.minimumLineSpacing
+                theoricalRect.origin.x = 0
+            } else if (theoricalRect.origin.x + self.itemSize.width) > self.collectionView!.frame.size.width {
+                theoricalRect.origin.x = 0
+                theoricalRect.origin.y = theoricalRect.origin.y + self.minimumLineSpacing + self.itemSize.height
             }
+            
+            return theoricalRect
         }
     }
     
@@ -161,28 +127,15 @@ class MonthCollectionViewLayout: CollectionViewFlowLayoutWithStickyHeader {
     }
     
     func frameForHeaderAtSection(section: Int, previousRect: CGRect) -> CGRect {
-        if self.scrollDirection == .vertical {
-            if previousRect == .zero {
-                return CGRect(x: 0, y: 0, width: self.headerReferenceSize.width, height: self.headerReferenceSize.height)
-            } else {
-                var theoricalRect = previousRect
-                theoricalRect.origin.x = CGFloat(section) * self.headerReferenceSize.width
-                theoricalRect.origin.y = theoricalRect.origin.y + self.itemSize.height + self.minimumLineSpacing
-                theoricalRect.size.width = self.headerReferenceSize.width
-                theoricalRect.size.height = self.headerReferenceSize.height
-                return theoricalRect
-            }
+        if previousRect == .zero {
+            return CGRect(x: 0, y: 0, width: self.headerReferenceSize.width, height: self.headerReferenceSize.height)
         } else {
-            if previousRect == .zero {
-                return CGRect(x: 0, y: 0, width: self.headerReferenceSize.width, height: self.headerReferenceSize.height)
-            } else {
-                var theoricalRect = previousRect
-                theoricalRect.origin.x = CGFloat(section) * self.headerReferenceSize.width
-                theoricalRect.origin.y = 0
-                theoricalRect.size.width = self.headerReferenceSize.width
-                theoricalRect.size.height = self.headerReferenceSize.height
-                return theoricalRect
-            }
+            var theoricalRect = previousRect
+            theoricalRect.origin.x = 0
+            theoricalRect.origin.y = theoricalRect.origin.y + self.itemSize.height + self.minimumLineSpacing
+            theoricalRect.size.width = self.headerReferenceSize.width
+            theoricalRect.size.height = self.headerReferenceSize.height
+            return theoricalRect
         }
     }
 }
