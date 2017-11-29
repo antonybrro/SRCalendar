@@ -12,6 +12,11 @@
 		0A2F4F431FCD7B0A004210C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2F4F411FCD7B0A004210C7 /* Main.storyboard */; };
 		0A2F4F451FCD7B0A004210C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2F4F441FCD7B0A004210C7 /* Assets.xcassets */; };
 		0A2F4F481FCD7B0A004210C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2F4F461FCD7B0A004210C7 /* LaunchScreen.storyboard */; };
+		0A2F4F501FCD9E01004210C7 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F4F1FCD9E01004210C7 /* CollectionViewCell.swift */; };
+		0A2F4F521FCDF8D5004210C7 /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F511FCDF8D5004210C7 /* MonthHeaderView.swift */; };
+		0A2F4F551FCDFAAC004210C7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F541FCDFAAC004210C7 /* Date.swift */; };
+		0A2F4F581FCE11CD004210C7 /* CollectionViewFlowLayoutWithStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F571FCE11CD004210C7 /* CollectionViewFlowLayoutWithStickyHeader.swift */; };
+		0A517A251FCEB6170019006D /* MonthCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A517A241FCEB6170019006D /* MonthCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		0A2F4F441FCD7B0A004210C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A2F4F471FCD7B0A004210C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A2F4F491FCD7B0A004210C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A2F4F4F1FCD9E01004210C7 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		0A2F4F511FCDF8D5004210C7 /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
+		0A2F4F541FCDFAAC004210C7 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		0A2F4F571FCE11CD004210C7 /* CollectionViewFlowLayoutWithStickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayoutWithStickyHeader.swift; sourceTree = "<group>"; };
+		0A517A241FCEB6170019006D /* MonthCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +64,27 @@
 		0A2F4F3C1FCD7B0A004210C7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				0A2F4F561FCE11BB004210C7 /* Layout */,
 				0A2F4F3D1FCD7B0A004210C7 /* AppDelegate.swift */,
 				0A2F4F3F1FCD7B0A004210C7 /* ViewController.swift */,
 				0A2F4F411FCD7B0A004210C7 /* Main.storyboard */,
 				0A2F4F441FCD7B0A004210C7 /* Assets.xcassets */,
 				0A2F4F461FCD7B0A004210C7 /* LaunchScreen.storyboard */,
 				0A2F4F491FCD7B0A004210C7 /* Info.plist */,
+				0A2F4F4F1FCD9E01004210C7 /* CollectionViewCell.swift */,
+				0A2F4F511FCDF8D5004210C7 /* MonthHeaderView.swift */,
+				0A2F4F541FCDFAAC004210C7 /* Date.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		0A2F4F561FCE11BB004210C7 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				0A2F4F571FCE11CD004210C7 /* CollectionViewFlowLayoutWithStickyHeader.swift */,
+				0A517A241FCEB6170019006D /* MonthCollectionViewLayout.swift */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +160,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2F4F401FCD7B0A004210C7 /* ViewController.swift in Sources */,
+				0A2F4F551FCDFAAC004210C7 /* Date.swift in Sources */,
+				0A2F4F581FCE11CD004210C7 /* CollectionViewFlowLayoutWithStickyHeader.swift in Sources */,
 				0A2F4F3E1FCD7B0A004210C7 /* AppDelegate.swift in Sources */,
+				0A2F4F521FCDF8D5004210C7 /* MonthHeaderView.swift in Sources */,
+				0A517A251FCEB6170019006D /* MonthCollectionViewLayout.swift in Sources */,
+				0A2F4F501FCD9E01004210C7 /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +305,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HHHUR439AA;
 				INFOPLIST_FILE = Calendar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antonybrro.calendar.Calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -292,6 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HHHUR439AA;
 				INFOPLIST_FILE = Calendar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antonybrro.calendar.Calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
