@@ -19,8 +19,7 @@ class MonthCollectionViewLayout: UICollectionViewFlowLayout {
         super.init(coder: aDecoder)
     }
     
-    func initWithWidth(width: CGFloat) -> MonthCollectionViewLayout {
-        
+    func setupWidth(_ width: CGFloat) {
         self.headerReferenceSize = CGSize(width: width, height: 64)
         
         let minSpacingWidth: CGFloat = 1
@@ -28,8 +27,6 @@ class MonthCollectionViewLayout: UICollectionViewFlowLayout {
         self.itemSize = CGSize(width: maxWidth, height: maxWidth)
         self.minimumLineSpacing = (width - (maxWidth * 7)) / 6
         self.minimumInteritemSpacing = self.minimumLineSpacing
-        
-        return self
     }
     
     override init() {

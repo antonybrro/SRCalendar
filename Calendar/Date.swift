@@ -8,32 +8,46 @@
 
 import Foundation
 
+enum DayType {
+    case today
+    case workday
+    case weekend
+    case workdayUnavaliable
+    case weekendUnavaliable
+}
+
 extension Date {
-    func calendar() -> Calendar {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar
-    }
-    
     func firstDayOfTheMonth() -> Date {
-        var components = calendar().dateComponents([.year, .month, .day], from: self)
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: self)
         components.day = 1
-        return calendar().date(from: components)!
+        return Calendar.current.date(from: components)!
     }
     
     func numberOfMonth() -> Int {
-        return calendar().dateComponents([.month], from: self, to: Date()).month! + 1
-    }
-    
-    func weekDay() -> Int {
-        return calendar().dateComponents([.weekday], from: self).weekday!
+        return Calendar.current.dateComponents([.month], from: self, to: Date()).month! + 2
     }
     
     func numberOfDaysInMonth() -> Int {
-        return calendar().range(of: .day, in: .month, for: self)!.count
+        return Calendar.current.range(of: .day, in: .month, for: self)!.count
+    }
+    
+    func weekDay() -> Int {
+        var weekDay = Calendar.current.dateComponents([.weekday], from: self).weekday!
+        
+        if Calendar.current.firstWeekday == 2 {
+            weekDay = weekDay - 1
+            weekDay = weekDay == 0 ? 7 : weekDay
+        }
+        
+        return weekDay
     }
     
     func dayComponents() ->Int {
-        return calendar().component(.day, from: self)
+        return Calendar.current.component(.day, from: self)
+    }
+    
+    func monthSymbol(at index: Int) -> String {
+        return DateFormatter().monthSymbols[index - 1]
     }
     
     func weekdaySymbols() -> [String] {
@@ -45,7 +59,15 @@ extension Date {
         return symbols
     }
     
-    func monthSymbol(at index: Int) -> String {
-        return DateFormatter().monthSymbols[index - 1]
+    func getDayType() -> DayType {
+        if Calendar.current.isDateInToday(self) {
+            return .today
+        }
+        
+        if Date() > self {
+            return Calendar.current.isDateInWeekend(self) ? .weekend : .workday
+        } else {
+            return Calendar.current.isDateInWeekend(self) ? .weekendUnavaliable : .workdayUnavaliable
+        }
     }
 }
