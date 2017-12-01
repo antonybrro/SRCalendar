@@ -9,6 +9,7 @@
 import Foundation
 
 enum DayType {
+    case empty
     case today
     case workday
     case weekend

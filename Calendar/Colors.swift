@@ -24,6 +24,9 @@ extension UIColor {
             static var workdayWithOpacity: UIColor { return UIColor(hex: "00000070")! }
             static var weekendWithOpacity: UIColor { return UIColor(hex: "A2006770")! }
         }
+        
+        static var selectedDate: (colors: [CGColor], locations: [NSNumber]) {
+            return (colors: [UIColor(hex: "A20067")!.cgColor, UIColor(hex: "AA005E")!.cgColor, UIColor(hex: "CE0037")!.cgColor], locations:[0.1, 0.5, 1.5]) }
     }
     
     convenience init?(hex: String) {

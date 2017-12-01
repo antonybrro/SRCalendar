@@ -17,7 +17,8 @@ class CalendarViewController: UIViewController {
     
     var fromDate: Date!
     var fromFirstDayMonth: Date!
-
+    var selectedIndex = Set<IndexPath>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +44,7 @@ class CalendarViewController: UIViewController {
         calendarCollectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         calendarCollectionView.dataSource = self
+        calendarCollectionView.delegate = self
         calendarCollectionView.alwaysBounceVertical = false
         
         self.calendarView.addSubview(calendarCollectionView)
@@ -115,18 +117,22 @@ extension CalendarViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let date = dateAtIndexPath(indexPath)
-
+        
         if let day = date?.dayComponents() {
             cell.setupCell("\(day)", date!.getDayType())
         } else {
-            cell.setupCell("")
+            cell.setupCell("", .empty)
+        }
+        
+        if cell.dayType == .workday || cell.dayType == .weekend {
+            selectedIndex.contains(indexPath) ? cell.select() : cell.unselect()
         }
         
         cell.clipsToBounds = true
         
         return cell
     }
-        
+    
     func dateAtIndexPath(_ indexPath: IndexPath) -> Date? {
         let firstDay = dateForFirstDayInSection(indexPath.section)
         let weekDay = firstDay.weekDay()
@@ -154,5 +160,25 @@ extension CalendarViewController: UICollectionViewDataSource {
         }
         
         return UICollectionReusableView()
+    }
+}
+
+extension CalendarViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
+        
+        if cell.dayType == .workdayUnavaliable || cell.dayType == .weekendUnavaliable || cell.dayType == .empty {
+            return
+        }
+        
+        if selectedIndex.contains(indexPath) {
+            cell.unselect()
+            selectedIndex.remove(indexPath)
+        } else {
+            if selectedIndex.count < 2 {
+                cell.select()
+                selectedIndex.insert(indexPath)
+            }
+        }
     }
 }
