@@ -27,6 +27,11 @@ extension UIColor {
             static var selectedCell: (colors: [CGColor], locations: [NSNumber]) {
                 return (colors: [UIColor(hex: "A20067")!.cgColor, UIColor(hex: "AA005E")!.cgColor, UIColor(hex: "CE0037")!.cgColor], locations:[0.1, 0.5, 1.5]) }
         }
+        
+        enum DatesHeader {
+            static var background: (colors: [CGColor], locations: [NSNumber]) {
+                return (colors: [UIColor(hex: "A20067")!.cgColor, UIColor(hex: "AA005E")!.cgColor, UIColor(hex: "CE0037")!.cgColor], locations:[0.1, 0.2, 1.0]) }
+        }
     }
     
     convenience init?(hex: String) {

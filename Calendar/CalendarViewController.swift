@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol CalendarViewControllerDelegate {
+    func selectedDates(dates: (from: Date, to: Date))
+}
+
 class CalendarViewController: UIViewController {
     
+    @IBOutlet weak var datesHeaderView: DatesHeaderView!
     @IBOutlet weak var calendarView: UIView!
     
     var calendarCollectionView: UICollectionView!
@@ -18,6 +23,8 @@ class CalendarViewController: UIViewController {
     var fromDate: Date!
     var fromFirstDayMonth: Date!
     var selectedIndex = Set<IndexPath>()
+    
+    var delegate: CalendarViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +45,10 @@ class CalendarViewController: UIViewController {
     }
     
     func setup() {
+        datesHeaderView.delegate = self
+        datesHeaderView.translations = [TextIds.fromLabel: "Date from",
+                                        TextIds.toLabel: "Date to"]
+            
         monthCollectionLayout = MonthCollectionViewLayout()
         monthCollectionLayout.scrollDirection = .vertical
         
@@ -91,6 +102,19 @@ class CalendarViewController: UIViewController {
         }
         
         return monthName
+    }
+    
+    func setupDatesForHeader() {
+        var dates = Set<Date>()
+        for index in selectedIndex {
+            dates.insert(dateAtIndexPath(index)!)
+        }
+        
+        datesHeaderView.setupDates(with: dates)
+        
+        if !dates.isEmpty {
+            delegate?.selectedDates(dates: (from: dates.min()!, to: dates.max()!))
+        }
     }
 }
 
@@ -204,6 +228,18 @@ extension CalendarViewController: UICollectionViewDelegate {
             }
         }
         
+        setupDatesForHeader()
+        
         collectionView.reloadData()
+    }
+}
+
+extension CalendarViewController: DatesHeaderViewDelegate {
+    func cancelBtnTouch() {
+        //Impl own action
+    }
+    
+    func acceptBtnTouch() {
+        //Impl own action
     }
 }

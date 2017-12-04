@@ -18,32 +18,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VW-Uh-9Ei">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
-                                <color key="backgroundColor" red="0.76952117681503296" green="0.0019039080943912268" blue="0.26123315095901489" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="Y3t-U8-vqj"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bE-0L-RCi">
-                                <rect key="frame" x="20" y="75" width="280" height="493"/>
+                                <rect key="frame" x="20" y="95" width="280" height="473"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VW-Uh-9Ei" customClass="DatesHeaderView" customModule="Calendar" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="320" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="QUC-4g-4r0"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0bE-0L-RCi" secondAttribute="trailing" constant="20" id="5Gl-lu-R2T"/>
-                            <constraint firstItem="0bE-0L-RCi" firstAttribute="top" secondItem="5VW-Uh-9Ei" secondAttribute="bottom" id="Cp2-dj-r6y"/>
-                            <constraint firstAttribute="trailing" secondItem="5VW-Uh-9Ei" secondAttribute="trailing" id="G63-jn-hZn"/>
-                            <constraint firstItem="0bE-0L-RCi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fbA-OO-GXZ"/>
-                            <constraint firstItem="5VW-Uh-9Ei" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rVV-bs-nIg"/>
-                            <constraint firstItem="5VW-Uh-9Ei" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="sDx-ab-Liv"/>
-                            <constraint firstItem="0bE-0L-RCi" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="zHh-zL-mG0"/>
+                            <constraint firstItem="0bE-0L-RCi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="HXg-Ti-N3f"/>
+                            <constraint firstItem="0bE-0L-RCi" firstAttribute="top" secondItem="5VW-Uh-9Ei" secondAttribute="bottom" id="Ygm-Ub-Dkx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0bE-0L-RCi" secondAttribute="trailing" constant="20" id="bcJ-9q-ufz"/>
+                            <constraint firstItem="5VW-Uh-9Ei" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fwH-GU-RGb"/>
+                            <constraint firstItem="0bE-0L-RCi" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="i5Z-Lb-k7n"/>
+                            <constraint firstItem="5VW-Uh-9Ei" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pcV-h9-Bfc"/>
+                            <constraint firstItem="5VW-Uh-9Ei" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="roo-PM-601"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="calendarView" destination="0bE-0L-RCi" id="WCL-2J-Y2N"/>
+                        <outlet property="datesHeaderView" destination="5VW-Uh-9Ei" id="t4B-n3-tFl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

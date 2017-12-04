@@ -15,6 +15,8 @@
 		0A2F4F501FCD9E01004210C7 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F4F1FCD9E01004210C7 /* CollectionViewCell.swift */; };
 		0A2F4F521FCDF8D5004210C7 /* MonthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F511FCDF8D5004210C7 /* MonthHeaderView.swift */; };
 		0A2F4F551FCDFAAC004210C7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2F4F541FCDFAAC004210C7 /* Date.swift */; };
+		0A3A926B1FD5928C00B5A979 /* DatesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A926A1FD5928C00B5A979 /* DatesHeaderView.swift */; };
+		0A3A926D1FD5929800B5A979 /* DatesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A926C1FD5929800B5A979 /* DatesHeaderView.xib */; };
 		0A517A251FCEB6170019006D /* MonthCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A517A241FCEB6170019006D /* MonthCollectionViewLayout.swift */; };
 		0AE03FF91FCF039E002A06D8 /* CalendarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE03FF81FCF039E002A06D8 /* CalendarCollectionView.swift */; };
 		0AF65F501FD050C200355B41 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF65F4F1FD050C200355B41 /* Colors.swift */; };
@@ -31,6 +33,8 @@
 		0A2F4F4F1FCD9E01004210C7 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		0A2F4F511FCDF8D5004210C7 /* MonthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeaderView.swift; sourceTree = "<group>"; };
 		0A2F4F541FCDFAAC004210C7 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		0A3A926A1FD5928C00B5A979 /* DatesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesHeaderView.swift; sourceTree = "<group>"; };
+		0A3A926C1FD5929800B5A979 /* DatesHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatesHeaderView.xib; sourceTree = "<group>"; };
 		0A517A241FCEB6170019006D /* MonthCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionViewLayout.swift; sourceTree = "<group>"; };
 		0AE03FF81FCF039E002A06D8 /* CalendarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionView.swift; sourceTree = "<group>"; };
 		0AF65F4F1FD050C200355B41 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				0A2F4F3F1FCD7B0A004210C7 /* CalendarViewController.swift */,
+				0A3A92691FD5925700B5A979 /* DatesHeaderView */,
 				0AE03FFA1FCF03C1002A06D8 /* CollectionView */,
 				0A2F4F541FCDFAAC004210C7 /* Date.swift */,
 				0AF65F4F1FD050C200355B41 /* Colors.swift */,
@@ -85,6 +90,15 @@
 				0A517A241FCEB6170019006D /* MonthCollectionViewLayout.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		0A3A92691FD5925700B5A979 /* DatesHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				0A3A926A1FD5928C00B5A979 /* DatesHeaderView.swift */,
+				0A3A926C1FD5929800B5A979 /* DatesHeaderView.xib */,
+			);
+			path = DatesHeaderView;
 			sourceTree = "<group>";
 		};
 		0AE03FFA1FCF03C1002A06D8 /* CollectionView */ = {
@@ -174,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2F4F481FCD7B0A004210C7 /* LaunchScreen.storyboard in Resources */,
+				0A3A926D1FD5929800B5A979 /* DatesHeaderView.xib in Resources */,
 				0A2F4F451FCD7B0A004210C7 /* Assets.xcassets in Resources */,
 				0A2F4F431FCD7B0A004210C7 /* Main.storyboard in Resources */,
 			);
@@ -189,6 +204,7 @@
 				0A2F4F401FCD7B0A004210C7 /* CalendarViewController.swift in Sources */,
 				0AF65F501FD050C200355B41 /* Colors.swift in Sources */,
 				0A2F4F551FCDFAAC004210C7 /* Date.swift in Sources */,
+				0A3A926B1FD5928C00B5A979 /* DatesHeaderView.swift in Sources */,
 				0A2F4F3E1FCD7B0A004210C7 /* AppDelegate.swift in Sources */,
 				0A2F4F521FCDF8D5004210C7 /* MonthHeaderView.swift in Sources */,
 				0AE03FF91FCF039E002A06D8 /* CalendarCollectionView.swift in Sources */,

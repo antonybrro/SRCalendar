@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatesHeaderView" customModule="Calendar" customModuleProvider="target">
+            <connections>
+                <outlet property="acceptBtn" destination="001-W2-acN" id="ds6-Li-1eR"/>
+                <outlet property="cancelBtn" destination="eX9-IG-jgD" id="evr-no-65S"/>
+                <outlet property="fromLabel" destination="xeb-6x-WjO" id="HeR-ip-8dY"/>
+                <outlet property="toLabel" destination="ceK-2E-jqR" id="iSf-gS-aqM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="83"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeb-6x-WjO">
+                    <rect key="frame" x="20" y="52" width="133.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19L-VY-jiB">
+                    <rect key="frame" x="153.5" y="52" width="20" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="7tK-bq-CB8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-2E-jqR">
+                    <rect key="frame" x="213.5" y="52" width="93.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="001-W2-acN">
+                    <rect key="frame" x="294" y="10" width="18" height="22"/>
+                    <state key="normal" image="accept"/>
+                    <connections>
+                        <action selector="acceptBtnTouch:" destination="-1" eventType="touchUpInside" id="8AU-aB-9ta"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eX9-IG-jgD">
+                    <rect key="frame" x="15" y="10" width="16" height="22"/>
+                    <state key="normal" image="cross"/>
+                    <connections>
+                        <action selector="cancelBtnTouch:" destination="-1" eventType="touchUpInside" id="KFs-GH-pK9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.76952117679999998" green="0.001903908094" blue="0.261233151" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eX9-IG-jgD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="2bZ-Zl-b0Q"/>
+                <constraint firstItem="ceK-2E-jqR" firstAttribute="leading" secondItem="19L-VY-jiB" secondAttribute="trailing" constant="40" id="4gG-kg-Dbb"/>
+                <constraint firstItem="eX9-IG-jgD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="6wm-hW-nvk"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="xeb-6x-WjO" secondAttribute="bottom" constant="10" id="835-UX-wRb"/>
+                <constraint firstItem="19L-VY-jiB" firstAttribute="leading" secondItem="xeb-6x-WjO" secondAttribute="trailing" id="BRw-ke-wCX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="001-W2-acN" secondAttribute="trailing" constant="15" id="FpR-ZP-KO2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ceK-2E-jqR" secondAttribute="trailing" constant="20" id="XJ5-MU-dNr"/>
+                <constraint firstItem="19L-VY-jiB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZvC-CV-Qsz"/>
+                <constraint firstItem="001-W2-acN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="gSJ-vZ-Ya6"/>
+                <constraint firstItem="xeb-6x-WjO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="kGG-lj-1do"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="19L-VY-jiB" secondAttribute="bottom" constant="10" id="nDi-KM-O2P"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ceK-2E-jqR" secondAttribute="bottom" constant="10" id="xjI-SN-Cxg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-11" y="-79"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="accept" width="18" height="17"/>
+        <image name="cross" width="16" height="15"/>
+    </resources>
+</document>

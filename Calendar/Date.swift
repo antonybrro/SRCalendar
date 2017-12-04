@@ -71,4 +71,10 @@ extension Date {
             return Calendar.current.isDateInWeekend(self) ? .weekendUnavaliable : .workdayUnavaliable
         }
     }
+    
+    func stringRepresentation(_ format: String? = nil) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format ?? "dd.MM.yyyy"
+        return formatter.string(from: self)
+    }
 }
