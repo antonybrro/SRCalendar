@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatesHeaderView" customModule="Calendar" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DatesHeaderView" customModule="SRCalendar" customModuleProvider="target">
             <connections>
                 <outlet property="acceptBtn" destination="001-W2-acN" id="ds6-Li-1eR"/>
                 <outlet property="cancelBtn" destination="eX9-IG-jgD" id="evr-no-65S"/>

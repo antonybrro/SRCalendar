@@ -1,6 +1,6 @@
 //
 //  MonthHeaderView.swift
-//  Calendar
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 11/28/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.
@@ -28,7 +28,7 @@ class MonthHeaderView: UICollectionReusableView {
         monthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 30))
         monthLabel.textAlignment = .left
         monthLabel.font = UIFont.systemFont(ofSize: 22)
-        monthLabel.textColor = UIColor.Calendar.Header.month
+        monthLabel.textColor = UIColor.SRCalendar.Header.month
         monthLabel.text = "Month"
         addSubview(monthLabel)
         
@@ -50,7 +50,7 @@ class MonthHeaderView: UICollectionReusableView {
             day.textAlignment = .center
             day.font = UIFont.systemFont(ofSize: 12)
             day.text = weekDays[i].uppercased()
-            day.textColor = i == 5 || i == 6 ? UIColor.Calendar.Header.weekday : UIColor.Calendar.Header.weekdayWithOpacity
+            day.textColor = i == 5 || i == 6 ? UIColor.SRCalendar.Header.weekday : UIColor.SRCalendar.Header.weekdayWithOpacity
             addSubview(day)
             xOffset += oneLabelWidth
             

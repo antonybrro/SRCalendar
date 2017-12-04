@@ -1,6 +1,6 @@
 //
 //  MonthCollectionViewLayout.swift
-//  Calendar
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 11/29/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.

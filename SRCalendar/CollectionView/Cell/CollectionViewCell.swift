@@ -1,6 +1,6 @@
 //
 //  CollectionViewCell.swift
-//  Calendar
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 11/28/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.
@@ -43,7 +43,7 @@ class CollectionViewCell: UICollectionViewCell {
         let circleLayer = CAShapeLayer()
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: (self.frame.width - 30) / 2, y: (self.frame.height - 30) / 2, width: 30, height: 30)).cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = UIColor.Calendar.Cell.weekend.cgColor
+        circleLayer.strokeColor = UIColor.SRCalendar.Cell.weekend.cgColor
         circleLayer.lineWidth = 1
         circleLayer.name = circleLayerName
         
@@ -53,8 +53,8 @@ class CollectionViewCell: UICollectionViewCell {
     private func setupGradientLayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: (self.frame.width - 30) / 2, y: (self.frame.height - 30) / 2, width: 30, height: 30)
-        gradientLayer.colors = UIColor.Calendar.Cell.selectedCell.colors
-        gradientLayer.locations = UIColor.Calendar.Cell.selectedCell.locations
+        gradientLayer.colors = UIColor.SRCalendar.Cell.selectedCell.colors
+        gradientLayer.locations = UIColor.SRCalendar.Cell.selectedCell.locations
         gradientLayer.cornerRadius = gradientLayer.frame.width / 2
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
@@ -66,7 +66,7 @@ class CollectionViewCell: UICollectionViewCell {
     private func setupFillLayer(_ position: CellRangePisition) {
         let fillLayer = CALayer()
         
-        fillLayer.backgroundColor = UIColor.Calendar.Cell.fill.cgColor
+        fillLayer.backgroundColor = UIColor.SRCalendar.Cell.fill.cgColor
         fillLayer.name = fillLayerName
         
         switch position {
@@ -126,13 +126,13 @@ class CollectionViewCell: UICollectionViewCell {
         case .today:
             setupTodayCircleLayer()
         case .workday:
-            self.day.textColor = UIColor.Calendar.Cell.workday
+            self.day.textColor = UIColor.SRCalendar.Cell.workday
         case .weekend:
-            self.day.textColor = UIColor.Calendar.Cell.weekend
+            self.day.textColor = UIColor.SRCalendar.Cell.weekend
         case .workdayUnavaliable:
-            self.day.textColor = UIColor.Calendar.Cell.workdayWithOpacity
+            self.day.textColor = UIColor.SRCalendar.Cell.workdayWithOpacity
         case .weekendUnavaliable:
-            self.day.textColor = UIColor.Calendar.Cell.weekendWithOpacity
+            self.day.textColor = UIColor.SRCalendar.Cell.weekendWithOpacity
         case .empty:
             break
         }

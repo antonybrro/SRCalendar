@@ -1,6 +1,6 @@
 //
 //  Colors.swift
-//  Calendar
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 11/30/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
     
-    enum Calendar {
+    enum SRCalendar {
         enum Header {
             static var month: UIColor { return UIColor(hex: "A40066")! }
             static var monthWithOpacity: UIColor { return UIColor(hex: "A4006670")! }

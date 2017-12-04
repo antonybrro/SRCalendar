@@ -1,6 +1,6 @@
 //
-//  CalendarCollectionView.swift
-//  Calendar
+//  SRCalendarCollectionView.swift
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 11/29/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.
@@ -11,7 +11,7 @@ import UIKit
 let collectionViewCellId = "CollectionViewCell"
 let monthHeaderViewId = "MonthHeaderView"
 
-class CalendarCollectionView: UICollectionView {
+class SRCalendarCollectionView: UICollectionView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

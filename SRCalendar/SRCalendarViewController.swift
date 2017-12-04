@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Calendar
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 11/28/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.
@@ -11,11 +11,11 @@ import UIKit
 var fromDate: Date!
 var toDate: Date = Date()
 
-protocol CalendarViewControllerDelegate {
+protocol SRCalendarViewControllerDelegate {
     func selectedDates(dates: (from: Date, to: Date))
 }
 
-class CalendarViewController: UIViewController {
+class SRCalendarViewController: UIViewController {
     
     @IBOutlet weak var datesHeaderView: DatesHeaderView!
     @IBOutlet weak var calendarView: UIView!
@@ -26,7 +26,7 @@ class CalendarViewController: UIViewController {
     var fromFirstDayMonth: Date!
     var selectedIndex = Set<IndexPath>()
     
-    var delegate: CalendarViewControllerDelegate?
+    var delegate: SRCalendarViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class CalendarViewController: UIViewController {
         monthCollectionLayout = MonthCollectionViewLayout()
         monthCollectionLayout.scrollDirection = .vertical
         
-        calendarCollectionView = CalendarCollectionView(frame: self.calendarView.bounds, collectionViewLayout: self.monthCollectionLayout)
+        calendarCollectionView = SRCalendarCollectionView(frame: self.calendarView.bounds, collectionViewLayout: self.monthCollectionLayout)
         calendarCollectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         calendarCollectionView.dataSource = self
@@ -146,7 +146,7 @@ class CalendarViewController: UIViewController {
     }
 }
 
-extension CalendarViewController: UICollectionViewDataSource {
+extension SRCalendarViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return fromFirstDayMonth.numberOfMonth(toDate)
     }
@@ -212,7 +212,7 @@ extension CalendarViewController: UICollectionViewDataSource {
     }
 }
 
-extension CalendarViewController: UICollectionViewDelegate {
+extension SRCalendarViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCell
         
@@ -240,7 +240,7 @@ extension CalendarViewController: UICollectionViewDelegate {
     }
 }
 
-extension CalendarViewController: DatesHeaderViewDelegate {
+extension SRCalendarViewController: DatesHeaderViewDelegate {
     func cancelBtnTouch() {
         //Impl own action
     }

@@ -1,6 +1,6 @@
 //
 //  DatesHeaderView.swift
-//  Calendar
+//  SRCalendar
 //
 //  Created by Antony Yurchenko on 12/4/17.
 //  Copyright © 2017 Antony Yurchenko. All rights reserved.
@@ -54,7 +54,7 @@ class DatesHeaderView: UIView {
             .instantiate(withOwner: self, options: nil)[0] as! UIView
         view.frame = bounds
         view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        setupGradientLayer(view, UIColor.Calendar.DatesHeader.background)
+        setupGradientLayer(view, UIColor.SRCalendar.DatesHeader.background)
         addSubview(view)
     }
     
