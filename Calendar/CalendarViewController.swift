@@ -26,6 +26,7 @@ class CalendarViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         self.refreshLayout()
     }
     
@@ -116,6 +117,7 @@ extension CalendarViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewCellId, for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
+        
         let date = dateAtIndexPath(indexPath)
         
         if let day = date?.dayComponents() {
@@ -124,11 +126,28 @@ extension CalendarViewController: UICollectionViewDataSource {
             cell.setupCell("", .empty)
         }
         
-        if cell.dayType == .workday || cell.dayType == .weekend {
-            selectedIndex.contains(indexPath) ? cell.select() : cell.unselect()
+        if (cell.dayType == .workday || cell.dayType == .weekend || cell.dayType == .today) {
+            if selectedIndex.contains(indexPath) {
+                cell.select()
+            }
+            
+            if selectedIndex.count == 2 {
+                let indexFrom = selectedIndex.min()!
+                let indexTo = selectedIndex.max()!
+                
+                if indexPath == indexFrom {
+                    cell.fillCell(.left)
+                }
+                
+                if indexPath == indexTo {
+                    cell.fillCell(.right)
+                }
+                
+                if indexPath > indexFrom && indexPath < indexTo {
+                    cell.fillCell(.center)
+                }
+            }
         }
-        
-        cell.clipsToBounds = true
         
         return cell
     }
@@ -172,13 +191,19 @@ extension CalendarViewController: UICollectionViewDelegate {
         }
         
         if selectedIndex.contains(indexPath) {
-            cell.unselect()
             selectedIndex.remove(indexPath)
         } else {
             if selectedIndex.count < 2 {
-                cell.select()
+                selectedIndex.insert(indexPath)
+            } else {
+                for index in selectedIndex {
+                    selectedIndex.remove(index)
+                }
+                
                 selectedIndex.insert(indexPath)
             }
         }
+        
+        collectionView.reloadData()
     }
 }

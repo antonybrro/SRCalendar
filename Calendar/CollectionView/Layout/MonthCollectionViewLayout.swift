@@ -22,11 +22,11 @@ class MonthCollectionViewLayout: UICollectionViewFlowLayout {
     func setupWidth(_ width: CGFloat) {
         self.headerReferenceSize = CGSize(width: width, height: 64)
         
-        let minSpacingWidth: CGFloat = 1
+        let minSpacingWidth: CGFloat = 0
         let maxWidth: CGFloat = floor((width - minSpacingWidth * 6) / 7)
         self.itemSize = CGSize(width: maxWidth, height: maxWidth)
-        self.minimumLineSpacing = (width - (maxWidth * 7)) / 6
-        self.minimumInteritemSpacing = self.minimumLineSpacing
+        self.minimumLineSpacing = 0
+        self.minimumInteritemSpacing = 0
     }
     
     override init() {

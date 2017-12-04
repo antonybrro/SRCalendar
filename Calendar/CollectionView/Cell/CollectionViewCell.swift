@@ -8,11 +8,18 @@
 
 import UIKit
 
+enum CellRangePisition {
+    case left
+    case right
+    case center
+}
+
 class CollectionViewCell: UICollectionViewCell {
     var day: UILabel!
     var dayType: DayType!
     
     let gradientLayerName = "gradientLayer"
+    let fillLayerName = "fillLayer"
     let circleLayerName = "circleLayer"
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,21 +29,38 @@ class CollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
     
-        setupGradientLayer()
         setupDayLabel()
     }
     
     private func setupGradientLayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: (self.frame.width - 30) / 2, y: (self.frame.height - 30) / 2, width: 30, height: 30)
-        gradientLayer.colors = UIColor.Calendar.selectedDate.colors
-        gradientLayer.locations = UIColor.Calendar.selectedDate.locations
+        gradientLayer.colors = UIColor.Calendar.Cell.selectedCell.colors
+        gradientLayer.locations = UIColor.Calendar.Cell.selectedCell.locations
         gradientLayer.cornerRadius = gradientLayer.frame.width / 2
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.isHidden = true
         gradientLayer.name = gradientLayerName
-        self.layer.addSublayer(gradientLayer)
+        
+        addSublayerToBackgroundView(gradientLayer)
+    }
+    
+    private func setupFillLayer(_ position: CellRangePisition) {
+        let fillLayer = CALayer()
+        
+        fillLayer.backgroundColor = UIColor.Calendar.Cell.fill.cgColor
+        fillLayer.name = fillLayerName
+        
+        switch position {
+        case .left:
+            fillLayer.frame = CGRect(x: self.frame.width / 2, y: (self.frame.height - 30) / 2, width: self.frame.width / 2, height: 30)
+        case .right:
+            fillLayer.frame = CGRect(x: 0, y: (self.frame.height - 30) / 2, width: self.frame.width / 2, height: 30)
+        case .center:
+            fillLayer.frame = CGRect(x: 0, y: (self.frame.height - 30) / 2, width: self.frame.width, height: 30)
+        }
+        
+        addSublayerToBackgroundView(fillLayer)
     }
     
     private func setupDayLabel() {
@@ -53,16 +77,27 @@ class CollectionViewCell: UICollectionViewCell {
         circleLayer.strokeColor = UIColor.Calendar.Cell.weekend.cgColor
         circleLayer.lineWidth = 1
         circleLayer.name = circleLayerName
-        self.day.layer.addSublayer(circleLayer)
+        
+        addSublayerToBackgroundView(circleLayer)
+    }
+    
+    private func addSublayerToBackgroundView(_ layer: CALayer) {
+        if let backgroundView = self.backgroundView {
+            backgroundView.layer.addSublayer(layer)
+        } else {
+            self.backgroundView = UIView(frame: self.frame)
+            self.backgroundView!.layer.addSublayer(layer)
+        }
     }
     
     func setupCell(_ day: String, _ dayType: DayType) {
         removeTodayCircle()
+        unselect()
+        removeFill()
+        
         self.day.text = day
         self.dayType = dayType
-    
-        self.layer.getLayer(by: gradientLayerName)?.isHidden = true
-        
+            
         switch dayType {
         case .today:
             setupTodayCircle()
@@ -79,19 +114,26 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func removeTodayCircle() {
-        self.day.layer.getLayer(by: circleLayerName)?.removeFromSuperlayer()
+    private func removeTodayCircle() {
+        self.backgroundView?.layer.getLayer(by: circleLayerName)?.removeFromSuperlayer()
     }
     
     func select() {
         day.textColor = .white
-        
-        self.layer.getLayer(by: gradientLayerName)?.isHidden = false
+        setupGradientLayer()
     }
     
-    func unselect() {
+    private func unselect() {
         day.textColor = .black
-        self.layer.getLayer(by: gradientLayerName)?.isHidden = true
+        self.backgroundView?.layer.getLayer(by: gradientLayerName)?.removeFromSuperlayer()
+    }
+    
+    func fillCell(_ position: CellRangePisition) {
+        setupFillLayer(position)
+    }
+    
+    private  func removeFill() {
+        self.backgroundView?.layer.getLayer(by: fillLayerName)?.removeFromSuperlayer()
     }
 }
 
