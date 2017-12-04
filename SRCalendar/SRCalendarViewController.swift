@@ -48,6 +48,7 @@ class SRCalendarViewController: UIViewController {
     
     func setup() {
         datesHeaderView.delegate = self
+        datesHeaderView.acceptBtnState(false)
         datesHeaderView.translations = [TextIds.fromLabel: "Date from",
                                         TextIds.toLabel: "Date to"]
             
@@ -114,9 +115,13 @@ class SRCalendarViewController: UIViewController {
         
         datesHeaderView.setupDates(with: dates)
         
-        if !dates.isEmpty {
+        let isDatesValid = !dates.isEmpty
+        
+        if isDatesValid {
             delegate?.selectedDates(dates: (from: dates.min()!, to: dates.max()!))
         }
+        
+        datesHeaderView.acceptBtnState(isDatesValid)
     }
     
     func dateAtIndexPath(_ indexPath: IndexPath) -> Date? {

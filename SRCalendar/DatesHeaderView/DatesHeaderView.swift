@@ -68,6 +68,10 @@ class DatesHeaderView: UIView {
         
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+    func acceptBtnState(_ isEnable: Bool) {
+        acceptBtn.isEnabled = isEnable
+    }
 
     func setupDates(with selectedIndex: Set<Date>) {
         if selectedIndex.isEmpty {
