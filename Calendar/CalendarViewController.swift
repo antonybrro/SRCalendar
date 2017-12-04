@@ -136,15 +136,15 @@ extension CalendarViewController: UICollectionViewDataSource {
                 let indexTo = selectedIndex.max()!
                 
                 if indexPath == indexFrom {
-                    cell.fillCell(.left)
+                    cell.fill(.left)
                 }
                 
                 if indexPath == indexTo {
-                    cell.fillCell(.right)
+                    cell.fill(.right)
                 }
                 
                 if indexPath > indexFrom && indexPath < indexTo {
-                    cell.fillCell(.center)
+                    cell.fill(.center)
                 }
             }
         }

@@ -32,6 +32,24 @@ class CollectionViewCell: UICollectionViewCell {
         setupDayLabel()
     }
     
+    private func setupDayLabel() {
+        day = UILabel(frame: self.contentView.bounds)
+        day.textAlignment = .center
+        day.font = UIFont.systemFont(ofSize: 12)
+        self.addSubview(day)
+    }
+    
+    private func setupTodayCircleLayer() {
+        let circleLayer = CAShapeLayer()
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: (self.frame.width - 30) / 2, y: (self.frame.height - 30) / 2, width: 30, height: 30)).cgPath
+        circleLayer.fillColor = UIColor.clear.cgColor
+        circleLayer.strokeColor = UIColor.Calendar.Cell.weekend.cgColor
+        circleLayer.lineWidth = 1
+        circleLayer.name = circleLayerName
+        
+        addSublayerToBackgroundView(circleLayer)
+    }
+    
     private func setupGradientLayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: (self.frame.width - 30) / 2, y: (self.frame.height - 30) / 2, width: 30, height: 30)
@@ -63,24 +81,6 @@ class CollectionViewCell: UICollectionViewCell {
         addSublayerToBackgroundView(fillLayer)
     }
     
-    private func setupDayLabel() {
-        day = UILabel(frame: self.contentView.bounds)
-        day.textAlignment = .center
-        day.font = UIFont.systemFont(ofSize: 12)
-        self.addSubview(day)
-    }
-    
-    private func setupTodayCircle() {
-        let circleLayer = CAShapeLayer()
-        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: (self.frame.width - 30) / 2, y: (self.frame.height - 30) / 2, width: 30, height: 30)).cgPath
-        circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = UIColor.Calendar.Cell.weekend.cgColor
-        circleLayer.lineWidth = 1
-        circleLayer.name = circleLayerName
-        
-        addSublayerToBackgroundView(circleLayer)
-    }
-    
     private func addSublayerToBackgroundView(_ layer: CALayer) {
         if let backgroundView = self.backgroundView {
             backgroundView.layer.addSublayer(layer)
@@ -90,17 +90,41 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func select() {
+        day.textColor = .white
+        setupGradientLayer()
+    }
+    
+    func fill(_ position: CellRangePisition) {
+        setupFillLayer(position)
+    }
+    
+    private func clearSelection() {
+        day.textColor = .black
+        self.backgroundView?.layer.getLayer(by: gradientLayerName)?.removeFromSuperlayer()
+    }
+    
+    private  func clearFill() {
+        self.backgroundView?.layer.getLayer(by: fillLayerName)?.removeFromSuperlayer()
+    }
+    
+    private func clearTodayCircle() {
+        self.backgroundView?.layer.getLayer(by: circleLayerName)?.removeFromSuperlayer()
+    }
+    
     func setupCell(_ day: String, _ dayType: DayType) {
-        removeTodayCircle()
-        unselect()
-        removeFill()
+        self.clipsToBounds = true
+        
+        clearTodayCircle()
+        clearSelection()
+        clearFill()
         
         self.day.text = day
         self.dayType = dayType
-            
+        
         switch dayType {
         case .today:
-            setupTodayCircle()
+            setupTodayCircleLayer()
         case .workday:
             self.day.textColor = UIColor.Calendar.Cell.workday
         case .weekend:
@@ -112,28 +136,6 @@ class CollectionViewCell: UICollectionViewCell {
         case .empty:
             break
         }
-    }
-    
-    private func removeTodayCircle() {
-        self.backgroundView?.layer.getLayer(by: circleLayerName)?.removeFromSuperlayer()
-    }
-    
-    func select() {
-        day.textColor = .white
-        setupGradientLayer()
-    }
-    
-    private func unselect() {
-        day.textColor = .black
-        self.backgroundView?.layer.getLayer(by: gradientLayerName)?.removeFromSuperlayer()
-    }
-    
-    func fillCell(_ position: CellRangePisition) {
-        setupFillLayer(position)
-    }
-    
-    private  func removeFill() {
-        self.backgroundView?.layer.getLayer(by: fillLayerName)?.removeFromSuperlayer()
     }
 }
 
