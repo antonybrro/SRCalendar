@@ -24,8 +24,8 @@ extension Date {
         return Calendar.current.date(from: components)!
     }
     
-    func numberOfMonth() -> Int {
-        return Calendar.current.dateComponents([.month], from: self, to: Date()).month! + 2
+    func numberOfMonth(_ to: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: self, to: to).month! + 2
     }
     
     func numberOfDaysInMonth() -> Int {
@@ -65,7 +65,7 @@ extension Date {
             return .today
         }
         
-        if Date() > self {
+        if toDate > self {
             return Calendar.current.isDateInWeekend(self) ? .weekend : .workday
         } else {
             return Calendar.current.isDateInWeekend(self) ? .weekendUnavaliable : .workdayUnavaliable

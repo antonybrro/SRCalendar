@@ -8,6 +8,9 @@
 
 import UIKit
 
+var fromDate: Date!
+var toDate: Date = Date()
+
 protocol CalendarViewControllerDelegate {
     func selectedDates(dates: (from: Date, to: Date))
 }
@@ -20,7 +23,6 @@ class CalendarViewController: UIViewController {
     var calendarCollectionView: UICollectionView!
     var monthCollectionLayout: MonthCollectionViewLayout!
     
-    var fromDate: Date!
     var fromFirstDayMonth: Date!
     var selectedIndex = Set<IndexPath>()
     
@@ -41,7 +43,7 @@ class CalendarViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.view.layoutIfNeeded()
-        self.scrollToLastItem()
+        self.scrollToCurrentDate()
     }
     
     func setup() {
@@ -65,9 +67,18 @@ class CalendarViewController: UIViewController {
         reloadContent()
     }
     
-    func scrollToLastItem() {
-        let section = calendarCollectionView.numberOfSections - 2
-        let indexPath = IndexPath.init(item: 10, section: section)
+    private func createDateFrom() {
+        var components = Calendar.current.dateComponents([.year, .month, .day], from: toDate)
+        components.day = 1
+        components.month = 1
+        components.year = 2017
+        
+        fromDate = Calendar.current.date(from: components)
+    }
+    
+    func scrollToCurrentDate() {
+        let section = sectionAtDate(Date())
+        let indexPath = IndexPath.init(item: 15, section: section - 1)
         calendarCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
     }
     
@@ -84,19 +95,10 @@ class CalendarViewController: UIViewController {
         self.calendarCollectionView.reloadData()
     }
     
-    private func createDateFrom() {
-        var components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
-        components.day = 1
-        components.month = 1
-        components.year = 2017
-        
-        fromDate = Calendar.current.date(from: components)
-    }
-    
     private func nameOfMonth(at indexPath: IndexPath) -> String {
         let date = dateForFirstDayInSection(indexPath.section)
         let components = Calendar.current.dateComponents([.month, .year], from: date)
-        var monthName = Date().monthSymbol(at: components.month!)
+        var monthName = toDate.monthSymbol(at: components.month!)
         if components.month! == 1 {
             monthName = monthName + " \(components.year!)"
         }
@@ -116,18 +118,24 @@ class CalendarViewController: UIViewController {
             delegate?.selectedDates(dates: (from: dates.min()!, to: dates.max()!))
         }
     }
-}
-
-extension CalendarViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fromFirstDayMonth.numberOfMonth()
+    
+    func dateAtIndexPath(_ indexPath: IndexPath) -> Date? {
+        let firstDay = dateForFirstDayInSection(indexPath.section)
+        let weekDay = firstDay.weekDay()
+        
+        if (indexPath.row < weekDay - 1) {
+            return nil
+        } else {
+            let calendar = Calendar.current
+            var components = calendar.dateComponents([.month, .day], from: firstDay)
+            components.day = indexPath.row - (weekDay - 1)
+            components.month = indexPath.section
+            return calendar.date(byAdding: components, to: fromFirstDayMonth)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let firstDay = dateForFirstDayInSection(section)
-        let weekDay = firstDay.weekDay() - 1
-        let items = weekDay + firstDay.numberOfDaysInMonth()
-        return items
+    func sectionAtDate(_ date: Date) -> Int{
+        return fromDate.numberOfMonth(date) - 1
     }
     
     func dateForFirstDayInSection(_ section: Int) -> Date {
@@ -135,6 +143,19 @@ extension CalendarViewController: UICollectionViewDataSource {
         dateComponents.month = section
         
         return Calendar.current.date(byAdding: dateComponents, to: fromFirstDayMonth)!
+    }
+}
+
+extension CalendarViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return fromFirstDayMonth.numberOfMonth(toDate)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let firstDay = dateForFirstDayInSection(section)
+        let weekDay = firstDay.weekDay() - 1
+        let items = weekDay + firstDay.numberOfDaysInMonth()
+        return items
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -174,21 +195,6 @@ extension CalendarViewController: UICollectionViewDataSource {
         }
         
         return cell
-    }
-    
-    func dateAtIndexPath(_ indexPath: IndexPath) -> Date? {
-        let firstDay = dateForFirstDayInSection(indexPath.section)
-        let weekDay = firstDay.weekDay()
-        
-        if (indexPath.row < weekDay - 1) {
-            return nil
-        } else {
-            let calendar = Calendar(identifier: .gregorian)
-            var components = calendar.dateComponents([.month, .day], from: firstDay)
-            components.day = indexPath.row - (weekDay - 1)
-            components.month = indexPath.section
-            return Calendar.current.date(byAdding: components, to: fromFirstDayMonth)
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
